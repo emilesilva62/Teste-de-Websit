@@ -40,7 +40,7 @@ function sanitizeInput(input) {
 
 function handleLogin(event) {
     event.preventDefault();
-    const email = sanitizeInput(document.getElementById('login-email').value.trim());
+    const email = sanitizeInput(document.getElementById('login-email').value.trim().toLowerCase());
     const password = sanitizeInput(document.getElementById('login-password').value.trim());
     const csrfToken = document.getElementById('csrf-token-login').value;
     const errorDiv = document.createElement('div');
@@ -59,12 +59,16 @@ function handleLogin(event) {
         return;
     }
 
+    console.log('Tentativa de login:', { email, password, csrfToken });
     fetch('/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, csrf_token: csrfToken })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Resposta do servidor:', response.status);
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert('Login bem-sucedido!');
@@ -74,7 +78,8 @@ function handleLogin(event) {
             showError('login-form', errorDiv);
         }
     })
-    .catch(() => {
+    .catch(error => {
+        console.error('Erro na requisição:', error);
         errorDiv.textContent = 'Erro ao conectar com o servidor.';
         showError('login-form', errorDiv);
     });
@@ -157,7 +162,7 @@ function handleRegister(event) {
             showError('register-form', errorDiv);
         }
     })
-    .catch(() => {
+    .catch(error => {
         errorDiv.textContent = 'Erro ao conectar com o servidor.';
         showError('register-form', errorDiv);
     });
@@ -192,7 +197,7 @@ function handleForgotPassword(event) {
             showError('forgot-form', errorDiv);
         }
     })
-    .catch(() => {
+    .catch(error => {
         errorDiv.textContent = 'Erro ao conectar com o servidor.';
         showError('forgot-form', errorDiv);
     });
@@ -233,7 +238,7 @@ function handleUpload(event) {
             showError('upload-form', errorDiv);
         }
     })
-    .catch(() => {
+    .catch(error => {
         errorDiv.textContent = 'Erro ao conectar com o servidor.';
         showError('upload-form', errorDiv);
     });

@@ -4,7 +4,7 @@
 :root {
     --primary-green: #00cc00;
     --secondary-green: #00b300;
-    --light-green: #538149;
+    --light-green: #337e33;
     --text-dark: #333;
     --text-light: #666;
     --white: #fff;
@@ -27,7 +27,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
-    background-color: var(--light-green); /* Fundo claro e verde suave */
+    background-color: var(--light-green);
 }
 
 /* Container */
@@ -90,7 +90,7 @@ header .container {
 
 /* Main */
 main {
-    margin-top: 120px; /* Mais espaço para o header fixo */
+    margin-top: 120px;
 }
 
 .section {
@@ -321,7 +321,7 @@ main {
 .form-group input {
     width: 100%;
     padding: var(--spacing-medium);
-    border: 1px solid #b3ffa4;
+    border: 1px solid #ccc;
     border-radius: var(--border-radius);
     font-size: 1rem;
     transition: var(--transition);
